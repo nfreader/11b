@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 templateClass: tmpl-post
 ---
-<h1>{{ title }}</h1>
+<h2 class="mb1 dib">{{ title }}</h2>{% if date %}<time class="postlist-date gray f6" datetime="{{ post.date | htmlDateString }}">{{ date | readableDate }}</time>{% endif %}
 
 {{ content | safe }}
 

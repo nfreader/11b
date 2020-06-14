@@ -5,6 +5,7 @@ const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
+const markdownItClass = require('@toycode/markdown-it-class');
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -16,7 +17,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
 
   eleventyConfig.addFilter("readableDate", dateObj => {
-    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLLL yyyy");
   });
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
@@ -45,8 +46,17 @@ module.exports = function(eleventyConfig) {
     linkify: true
   }).use(markdownItAnchor, {
     permalink: true,
-    permalinkClass: "direct-link",
-    permalinkSymbol: "#"
+    permalinkClass: "section-link absolute link hover gray dim",
+    permalinkSymbol: "¶",
+    permalinkBefore: true
+  }).use(markdownItClass, {
+    h1: ['f3', 'lh-copy', 'helvetica', 'relative'],
+    h2: ['f4', 'lh-copy', 'helvetica', 'relative'],
+    h3: ['f4', 'lh-copy', 'helvetica', 'relative'],
+    h4: ['f4', 'lh-copy', 'helvetica', 'relative'],
+    h5: ['f4', 'lh-copy', 'helvetica', 'relative'],
+    p:  ['georgia', 'lh-copy'],
+    pre: ['courier','bg--light-gray']
   });
   eleventyConfig.setLibrary("md", markdownLibrary);
 
@@ -65,6 +75,12 @@ module.exports = function(eleventyConfig) {
     },
     ui: false,
     ghostMode: false
+  });
+
+  eleventyConfig.setFrontMatterParsingOptions({
+    excerpt: true,
+    excerpt_separator: "<!-- excerpt -->",
+    excerpt_alias: 'excerpt'
   });
 
   return {
