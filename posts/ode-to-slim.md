@@ -17,7 +17,7 @@ While I'm on the topic of writing better code, I should also give a shoutout to 
 As far as template engines go, nothing, and I mean nothing, holds a candle to [Twig](https://twig.symfony.com/doc/3.x/). I have never experimented with another PHP templating engine because there's never been a reason to do so. Twig has everything I could ever want, and so much more. The template syntax is easy to use and simultaneously incredibly powerful. I mean, check this out:
 
 > You can also provide a list of templates that are checked for existence before inclusion. The first template that exists will be included:  
-> `{% include ['page_detailed.html', 'page.html'] %}`
+> `\{% include ['page_detailed.html', 'page.html'] %\}`
 
 Native PHP can't even do this! How cool is that?
 
